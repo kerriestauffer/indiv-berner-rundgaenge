@@ -22,7 +22,7 @@ export class HomeComponent {
   public POIoptions: POI[] = []; // POI of interest we get from the backend
   chosenPOIs = []; // array to store user chose POIs
 
-  private categoriesWithData: CategorizedData[] = [
+  public categoriesWithData: CategorizedData[] = [
     { name: 'Kunst im öffentlichen Raum', data: [] },
     { name: 'Stadtverwaltung', data: [] },
     { name: 'Spielplatz', data: [] },
