@@ -16,3 +16,25 @@
     >
   </div>
 </form>
+<h2>Points of Interests</h2>
+<ul>
+<li *ngFor="let element of POIoptions">{{element.name}}</li>
+<!-- <button type="button" (click)="onSelect(element)"></button> -->
+</ul>
+<mat-grid-list cols="3">
+  <mat-grid-tile *ngFor="let element of POIoptions">
+
+<mat-card  class="example-card">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>{{element.name}}</mat-card-title>
+      <mat-card-subtitle>{{element.rubrik}}</mat-card-subtitle>
+      <img mat-card-xl-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    {{element.beschrieb}}
+  </mat-card-content>
+</mat-card>
+</mat-grid-tile>
+</mat-grid-list>
