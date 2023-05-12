@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
-import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -21,7 +21,7 @@ import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
     MatSlideToggleModule,
     HttpClientModule,
     MatCardModule,
- MatGridListModule
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

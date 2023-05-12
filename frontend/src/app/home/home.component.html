@@ -17,31 +17,37 @@
   </div>
 </form>
 <h2>Points of Interests</h2>
-<div class="categories" *ngFor="let category of categoriesWithData">
-  <h3>{{ category.name }}</h3>
 
-  <div class="grid-container">
-    <div class="card-container" *ngFor="let poi of category.data">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title-group>
-            <mat-card-title>{{ poi.Punktname }}</mat-card-title>
-            <mat-card-subtitle>{{ poi.Rubrik }}</mat-card-subtitle>
-            <img
-              *ngIf="poi.Pfad_Foto"
-              mat-card-xl-image
-              [src]="poi.Pfad_Foto"
-            />
-          </mat-card-title-group>
-        </mat-card-header>
-        <mat-card-content>
-          <div
-            class="poi-beschrieb"
-            *ngIf="poi.Beschrieb"
-            [innerHTML]="poi.Beschrieb"
-          ></div>
-        </mat-card-content>
-      </mat-card>
-    </div>
+<mat-accordion>
+  <div class="categories" *ngFor="let category of categoriesWithData">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ category.name }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="grid-container">
+        <div class="card-container" *ngFor="let poi of category.data">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title-group>
+                <mat-card-title>{{ poi.Punktname }}</mat-card-title>
+                <mat-card-subtitle>{{ poi.Rubrik }}</mat-card-subtitle>
+                <img
+                  *ngIf="poi.Pfad_Foto"
+                  mat-card-xl-image
+                  [src]="poi.Pfad_Foto"
+                />
+              </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+              <div
+                class="poi-beschrieb"
+                *ngIf="poi.Beschrieb"
+                [innerHTML]="poi.Beschrieb"
+              ></div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
   </div>
-</div>
+</mat-accordion>
