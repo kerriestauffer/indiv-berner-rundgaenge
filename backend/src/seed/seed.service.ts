@@ -5,7 +5,7 @@ import { SEED } from './seed';
 @Injectable()
 export class SeedService implements OnApplicationBootstrap {
   private readonly collections = {
-    poiCollection: 'data',
+    poiCollection: 'poiData',
   };
 
   constructor(private mongo: MongoService) {}
