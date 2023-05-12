@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { DataService } from '../shared/data.service';
 
 @Component({
   selector: 'app-home',
@@ -16,5 +17,7 @@ export class HomeComponent {
   POIoptions = []; // POI of interest we get from the backend
   chosenPOIs = []; // array to store user chose POIs
 
-  constructor() {}
+  constructor(private dataService: DataService) {
+    dataService.testRequest();
+  }
 }
