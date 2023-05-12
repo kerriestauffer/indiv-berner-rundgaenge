@@ -18,6 +18,8 @@ export class HomeComponent {
   chosenPOIs = []; // array to store user chose POIs
 
   constructor(private dataService: DataService) {
-    dataService.testRequest();
+    dataService.testRequest().subscribe((res) => {
+      // console.log(res);
+    });
   }
 }
