@@ -10,6 +10,7 @@ import { join } from 'path';
 import { SeedModule } from './seed/seed.module';
 import { MongoModule } from './mongo/mongo.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { PoiDataModule } from './poi-data/poi-data.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
     }),
     SeedModule,
     MongoModule,
+    PoiDataModule,
   ],
   controllers: [AppController],
   providers: [AppService],
