@@ -20,6 +20,14 @@
 <ul *ngFor="let chosenPOI of chosenPOIs">
   <li>{{ chosenPOI.Punktname }}</li>
 </ul>
+<button
+  *ngIf="isAtLeastTwoSelected()"
+  mat-raised-button
+  color="primary"
+  (click)="getIndividualWalk()"
+>
+  Individuellen Spaziergang erhalten
+</button>
 
 <h2>Points of Interests auswählen</h2>
 <mat-accordion>

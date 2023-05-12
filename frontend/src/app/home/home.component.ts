@@ -44,6 +44,11 @@ export class HomeComponent {
     });
   }
 
+  getIndividualWalk() {
+    console.log(this.chosenPOIs);
+    // send backend request
+  }
+
   private categorizeData(data: POI[], category: String): POI[] {
     return data.filter((poi) => poi.Rubrik === category);
   }
@@ -60,5 +65,9 @@ export class HomeComponent {
 
   isSelected(poi: POI): boolean {
     return this.chosenPOIs.includes(poi);
+  }
+
+  isAtLeastTwoSelected(): boolean {
+    return this.chosenPOIs.length >= 2;
   }
 }
