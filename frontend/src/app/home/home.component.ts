@@ -8,7 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class HomeComponent {
   mobilityOptionsForm = new FormGroup({
-    foot_traffic: new FormControl(false),
+    foot_traffic: new FormControl(true),
     public_transport: new FormControl(false),
     publibike: new FormControl(false),
   });
