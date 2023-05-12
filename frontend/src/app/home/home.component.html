@@ -17,19 +17,23 @@
   </div>
 </form>
 <h2>Points of Interests</h2>
-<mat-grid-list cols="3">
-  <mat-grid-tile *ngFor="let element of POIoptions">
+<div class="grid-container">
+  <div class="card-container" *ngFor="let poi of POIoptions">
     <mat-card class="example-card">
       <mat-card-header>
         <mat-card-title-group>
-          <mat-card-title>{{ element.Punktname }}</mat-card-title>
-          <mat-card-subtitle>{{ element.Rubrik }}</mat-card-subtitle>
-          <img mat-card-xl-image [src]="element.Pfad_Foto" />
+          <mat-card-title>{{ poi.Punktname }}</mat-card-title>
+          <mat-card-subtitle>{{ poi.Rubrik }}</mat-card-subtitle>
+          <img *ngIf="poi.Pfad_Foto" mat-card-xl-image [src]="poi.Pfad_Foto" />
         </mat-card-title-group>
       </mat-card-header>
       <mat-card-content>
-        {{ element.Beschrieb }}
+        <div
+          class="poi-beschrieb"
+          *ngIf="poi.Beschrieb"
+          [innerHTML]="poi.Beschrieb"
+        ></div>
       </mat-card-content>
     </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>
