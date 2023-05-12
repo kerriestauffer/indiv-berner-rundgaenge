@@ -16,8 +16,12 @@
     >
   </div>
 </form>
-<h2>Points of Interests</h2>
+<h2>Ausgewählte Points of Interests</h2>
+<ul *ngFor="let chosenPOI of chosenPOIs">
+  <li>Name:{{ chosenPOI.Punktname }} Rubrik: {{ chosenPOI.Rubrik }}</li>
+</ul>
 
+<h2>Points of Interests auswählen</h2>
 <mat-accordion>
   <div class="categories" *ngFor="let category of categoriesWithData">
     <mat-expansion-panel hideToggle>
@@ -26,7 +30,7 @@
       </mat-expansion-panel-header>
       <div class="grid-container">
         <div class="card-container" *ngFor="let poi of category.data">
-          <mat-card class="example-card">
+          <mat-card class="example-card" (click)="togglePOISelection(poi)">
             <mat-card-header>
               <mat-card-title-group>
                 <mat-card-title>{{ poi.Punktname }}</mat-card-title>

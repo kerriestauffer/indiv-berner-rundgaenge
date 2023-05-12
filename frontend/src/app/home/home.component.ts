@@ -20,7 +20,7 @@ export class HomeComponent {
   });
 
   public POIoptions: POI[] = []; // POI of interest we get from the backend
-  chosenPOIs = []; // array to store user chose POIs
+  chosenPOIs: POI[] = []; // array to store user chose POIs
 
   public categoriesWithData: CategorizedData[] = [
     { name: 'Kunst im öffentlichen Raum', data: [] },
@@ -45,6 +45,16 @@ export class HomeComponent {
   }
 
   private categorizeData(data: POI[], category: String): POI[] {
-    return data.filter((poi) => poi.Rubrik == category);
+    return data.filter((poi) => poi.Rubrik === category);
+  }
+
+  togglePOISelection(poi: POI) {
+    if (this.chosenPOIs.includes(poi)) {
+      this.chosenPOIs = this.chosenPOIs.filter(
+        (element) => element.Punktname !== poi.Punktname
+      );
+    } else {
+      this.chosenPOIs.push(poi);
+    }
   }
 }
