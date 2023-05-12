@@ -1,0 +1,26 @@
+#map {
+  height: 75vh;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  @media screen and (max-width: 600px) {
+    height: 50vh;
+  }
+}
+
+#route-info {
+  background-color: white;
+  padding: 1em;
+}
+
+#map-infos {
+  display: flex;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+#container {
+  width: 100%;
+}
