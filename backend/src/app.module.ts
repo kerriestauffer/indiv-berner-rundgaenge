@@ -5,13 +5,6 @@ import * as Joi from 'joi';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-<<<<<<< HEAD
-import { RoutesModule } from './routes/routes.module';
-import {HttpModule} from '@nestjs/axios'
-
-@Module({
-  imports: [RoutesModule, HttpModule],
-=======
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SeedModule } from './seed/seed.module';
@@ -55,7 +48,6 @@ import { PoiDataModule } from './poi-data/poi-data.module';
     MongoModule,
     PoiDataModule,
   ],
->>>>>>> 5cafa6eb487f1c4f44ecca48f559674489167e1b
   controllers: [AppController],
   providers: [AppService],
 })

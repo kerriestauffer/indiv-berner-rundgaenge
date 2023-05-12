@@ -1,13 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-<<<<<<< HEAD
   const config = new DocumentBuilder()
     .setTitle('Individuelle Berner Stadtspaziergänge')
     .setDescription('API Routenfinder')
@@ -16,7 +14,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-=======
   const configService: ConfigService = app.get(ConfigService);
 
   app.enableCors();
@@ -38,7 +35,6 @@ async function bootstrap() {
   }
 
   const port = await configService.get('PORT');
->>>>>>> 5cafa6eb487f1c4f44ecca48f559674489167e1b
   await app.listen(3000);
 }
 bootstrap();
