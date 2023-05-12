@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataService, POI } from '../shared/data.service';
 
+export type CategorizedData = {
+  name: string;
+  data: POI[];
+};
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,17 +19,32 @@ export class HomeComponent {
     publibike: new FormControl(false),
   });
 
- public POIoptions: POI[] = [];// POI of interest we get from the backend
+  public POIoptions: POI[] = []; // POI of interest we get from the backend
   chosenPOIs = []; // array to store user chose POIs
 
+  private categoriesWithData: CategorizedData[] = [
+    { name: 'Kunst im öffentlichen Raum', data: [] },
+    { name: 'Stadtverwaltung', data: [] },
+    { name: 'Spielplatz', data: [] },
+    { name: 'Kantonsverwaltung', data: [] },
+    { name: 'Sehenswürdigkeiten', data: [] },
+    { name: 'Café', data: [] },
+    { name: 'Sport & Aktivitäten &#62; Aareschwimmen & Baden', data: [] },
+    { name: 'Kunst & Kultur', data: [] },
+  ];
 
   public constructor(private dataService: DataService) {
     dataService.testRequest().subscribe((res) => {
       this.POIoptions = res;
-       console.log(res);
+      //console.log(res);
+      for (let category of this.categoriesWithData) {
+        category.data = this.categorizeData(this.POIoptions, category.name);
+      }
+      console.log(this.categoriesWithData);
     });
   }
+
+  private categorizeData(data: POI[], category: String): POI[] {
+    return data.filter((poi) => poi.Rubrik == category);
+  }
 }
-
-
-
