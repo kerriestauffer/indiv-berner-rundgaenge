@@ -33,7 +33,12 @@
           <mat-card class="example-card" (click)="togglePOISelection(poi)">
             <mat-card-header>
               <mat-card-title-group>
-                <mat-card-title>{{ poi.Punktname }}</mat-card-title>
+                <mat-card-title
+                  >{{ poi.Punktname }}
+                  <span class="selected" *ngIf="isSelected(poi)"
+                    >AUSGEWÄHLT</span
+                  ></mat-card-title
+                >
                 <mat-card-subtitle>{{ poi.Rubrik }}</mat-card-subtitle>
                 <img
                   *ngIf="poi.Pfad_Foto"

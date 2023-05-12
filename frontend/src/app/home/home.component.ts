@@ -57,4 +57,8 @@ export class HomeComponent {
       this.chosenPOIs.push(poi);
     }
   }
+
+  isSelected(poi: POI): boolean {
+    return this.chosenPOIs.includes(poi);
+  }
 }
