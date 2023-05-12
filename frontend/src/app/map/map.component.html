@@ -1,10 +1,19 @@
-<div id="map_page">
-  <div><a href="/">Home</a></div>
-  <div id="">
-    <div id="container">
-      <div id="map"></div>
+<div>
+  <div id="map_page">
+    <div><a href="/">Home</a></div>
+    <div id="map-infos">
+      <div id="container">
+        <div id="map"></div>
+      </div>
+
+      <div id="route-info">
+        <h3>Ausgewählte Sehenswürdigkeiten</h3>
+        <ng-container *ngFor="let point of waypoints"
+          ><div>
+            <p>{{ point.name }}</p>
+          </div></ng-container
+        >
+      </div>
     </div>
-    <div></div>
   </div>
 </div>
-

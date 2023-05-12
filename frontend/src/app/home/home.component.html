@@ -16,3 +16,55 @@
     >
   </div>
 </form>
+<h2>Ausgewählte Points of Interests</h2>
+<ul *ngFor="let chosenPOI of chosenPOIs">
+  <li>{{ chosenPOI.Punktname }}</li>
+</ul>
+<button
+  *ngIf="isAtLeastTwoSelected()"
+  mat-raised-button
+  color="primary"
+  (click)="getIndividualWalk()"
+>
+  Individuellen Spaziergang erhalten
+</button>
+
+<h2>Points of Interests auswählen</h2>
+<mat-accordion>
+  <div class="categories" *ngFor="let category of categoriesWithData">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ category.name }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="grid-container">
+        <div class="card-container" *ngFor="let poi of category.data">
+          <mat-card class="example-card" (click)="togglePOISelection(poi)">
+            <mat-card-header>
+              <mat-card-title-group>
+                <mat-card-title
+                  >{{ poi.Punktname }}
+                  <span class="selected" *ngIf="isSelected(poi)"
+                    >AUSGEWÄHLT</span
+                  ></mat-card-title
+                >
+                <mat-card-subtitle>{{ poi.Rubrik }}</mat-card-subtitle>
+                <img
+                  *ngIf="poi.Pfad_Foto"
+                  mat-card-xl-image
+                  [src]="poi.Pfad_Foto"
+                />
+              </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content>
+              <div
+                class="poi-beschrieb"
+                *ngIf="poi.Beschrieb"
+                [innerHTML]="poi.Beschrieb"
+              ></div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</mat-accordion>

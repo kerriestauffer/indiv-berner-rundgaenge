@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { DataService } from '../shared/data.service';
+import { DataService, POI } from '../shared/data.service';
+
+export type CategorizedData = {
+  name: string;
+  data: POI[];
+};
 
 @Component({
   selector: 'app-home',
@@ -14,12 +19,55 @@ export class HomeComponent {
     publibike: new FormControl(false),
   });
 
-  POIoptions = []; // POI of interest we get from the backend
-  chosenPOIs = []; // array to store user chose POIs
+  public POIoptions: POI[] = []; // POI of interest we get from the backend
+  chosenPOIs: POI[] = []; // array to store user chose POIs
 
-  constructor(private dataService: DataService) {
+  public categoriesWithData: CategorizedData[] = [
+    { name: 'Kunst im öffentlichen Raum', data: [] },
+    { name: 'Stadtverwaltung', data: [] },
+    { name: 'Spielplatz', data: [] },
+    { name: 'Kantonsverwaltung', data: [] },
+    { name: 'Sehenswürdigkeiten', data: [] },
+    { name: 'Café', data: [] },
+    { name: 'Sport & Aktivitäten &#62; Aareschwimmen & Baden', data: [] },
+    { name: 'Kunst & Kultur', data: [] },
+  ];
+
+  public constructor(private dataService: DataService) {
     dataService.testRequest().subscribe((res) => {
-      // console.log(res);
+      this.POIoptions = res;
+      //console.log(res);
+      for (let category of this.categoriesWithData) {
+        category.data = this.categorizeData(this.POIoptions, category.name);
+      }
+      console.log(this.categoriesWithData);
     });
+  }
+
+  getIndividualWalk() {
+    console.log(this.chosenPOIs);
+    // send backend request
+  }
+
+  private categorizeData(data: POI[], category: String): POI[] {
+    return data.filter((poi) => poi.Rubrik === category);
+  }
+
+  togglePOISelection(poi: POI) {
+    if (this.chosenPOIs.includes(poi)) {
+      this.chosenPOIs = this.chosenPOIs.filter(
+        (element) => element.Punktname !== poi.Punktname
+      );
+    } else {
+      this.chosenPOIs.push(poi);
+    }
+  }
+
+  isSelected(poi: POI): boolean {
+    return this.chosenPOIs.includes(poi);
+  }
+
+  isAtLeastTwoSelected(): boolean {
+    return this.chosenPOIs.length >= 2;
   }
 }
