@@ -18,7 +18,7 @@
 </form>
 <h2>Points of Interests</h2>
 <ul>
-<li *ngFor="let element of POIoptions">{{element.name}}</li>
+<li *ngFor="let element of POIoptions">{{element.Punktname}}</li>
 <!-- <button type="button" (click)="onSelect(element)"></button> -->
 </ul>
 <mat-grid-list cols="3">
@@ -27,13 +27,13 @@
 <mat-card  class="example-card">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title>{{element.name}}</mat-card-title>
-      <mat-card-subtitle>{{element.rubrik}}</mat-card-subtitle>
+      <mat-card-title>{{element.Punktname}}</mat-card-title>
+      <mat-card-subtitle>{{element.Rubrik}}</mat-card-subtitle>
       <img mat-card-xl-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" >
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-content>
-    {{element.beschrieb}}
+    {{element.Beschrieb}}
   </mat-card-content>
 </mat-card>
 </mat-grid-tile>
