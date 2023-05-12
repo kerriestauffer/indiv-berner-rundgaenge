@@ -137,7 +137,9 @@ export class MapComponent {
           this.waypoints[i].location[1],
           this.waypoints[i].location[0]
         )
-      ).addTo(this.map);
+      )
+        .bindPopup(this.waypoints[i].name)
+        .addTo(this.map);
     }
   }
 }
