@@ -20,6 +20,7 @@ export class HomeComponent {
   constructor(private dataService: DataService) {
     dataService.testRequest().subscribe((res) => {
       // console.log(res);
+      console.log('test');
     });
   }
 }
