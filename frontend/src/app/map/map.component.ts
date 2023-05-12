@@ -3,23 +3,6 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 L.Icon.Default.imagePath = 'assets/images/';
 
-/* const iconRetinaUrl =
-  'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png';
-const iconUrl = 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png';
-const shadowUrl =
-  'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png';
-const iconDefault = L.icon({
-  iconRetinaUrl,
-  iconUrl,
-  shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41],
-});
-L.Marker.prototype.options.icon = iconDefault; */
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -132,10 +115,6 @@ export class MapComponent {
   }
   private loadMap(): void {
     this.map = L.map('map').setView([46.9441763932318, 7.44932287319358], 18);
-    /* L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(this.map); */
     L.tileLayer
       .wms('https://map.bern.ch/wms/OpenData/proxy.php?', {
         layers: 'Stadtplan_farbig',
@@ -150,7 +129,15 @@ export class MapComponent {
         return { color: 'black' };
       },
     }).addTo(this.map);
-
     this.map.fitBounds(geoJSON.getBounds());
+
+    for (let i = 0; i < this.waypoints.length; i++) {
+      L.marker(
+        new L.LatLng(
+          this.waypoints[i].location[1],
+          this.waypoints[i].location[0]
+        )
+      ).addTo(this.map);
+    }
   }
 }
