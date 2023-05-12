@@ -1,0 +1,18 @@
+<!--
+    - mobility toggles
+    - places form / checkboxes
+-->
+<h2>Mobility Options</h2>
+<form [formGroup]="mobilityOptionsForm">
+  <div class="flex-col">
+    <mat-slide-toggle formControlName="foot_traffic" labelPosition="before"
+      >Foot traffic</mat-slide-toggle
+    >
+    <mat-slide-toggle formControlName="public_transport" labelPosition="before"
+      >Public transport</mat-slide-toggle
+    >
+    <mat-slide-toggle formControlName="publibike" labelPosition="before"
+      >PubliBike</mat-slide-toggle
+    >
+  </div>
+</form>
