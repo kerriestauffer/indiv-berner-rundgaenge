@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { join } from 'path';
         MONGO_URL: Joi.string().required(),
         PORT: Joi.number(),
         API_PREFIX: Joi.string(),
-      })
+      }),
     }),
     ServeStaticModule.forRootAsync({
       imports: [ConfigModule],
@@ -39,11 +40,9 @@ import { join } from 'path';
       },
       inject: [ConfigService],
     }),
+    SeedModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-  ],
+  providers: [AppService],
 })
-export class AppModule { }
-
+export class AppModule {}
