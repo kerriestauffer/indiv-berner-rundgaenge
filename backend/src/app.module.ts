@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MongoModule } from './mongo/mongo.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { join } from 'path';
         PRODUCTION: Joi.bool().required(),
         SEED_MONGO: Joi.bool().required(),
         MONGO_URL: Joi.string().required(),
+        MONGO_DB: Joi.string().required(),
         PORT: Joi.number(),
         API_PREFIX: Joi.string(),
       })
@@ -39,6 +41,7 @@ import { join } from 'path';
       },
       inject: [ConfigService],
     }),
+    MongoModule,
   ],
   controllers: [AppController],
   providers: [

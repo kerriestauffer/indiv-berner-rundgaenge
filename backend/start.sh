@@ -69,7 +69,7 @@ else
 fi
 
 # Start postgres container
-DB_CONTAINER=$(sudo docker run --rm -p 127.0.0.1:27017:27017 -d -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=password mongo:6.0.5) && suc "Mongo started! $DB_CONTAINER" || exit 1
+DB_CONTAINER=$(sudo docker run --rm -p 127.0.0.1:27017:27017 -d mongo:6.0.5) && suc "Mongo started! $DB_CONTAINER" || exit 1
 
 # Create db schema
 #npx prisma db push
