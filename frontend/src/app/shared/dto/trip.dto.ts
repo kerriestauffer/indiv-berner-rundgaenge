@@ -1,17 +1,14 @@
-export class Waypoint {
-    //todo: unique id
+export class Waypoints {
     hint: string;
     distance: number;
     name: string;
     location: Array<number>;
-    _id: string;
 
-    constructor(hint: string, distance: number, name: string, location: Array<number>, _id: string){
+    constructor(hint: string, distance: number, name: string, location: Array<number>){
         this.hint = hint;
         this.distance = distance;
         this.name = name;
         this.location = location;
-        this._id = _id;
     }
   }
 
@@ -42,12 +39,12 @@ export class Geometry {
   }
 
 
-export class Route {
+export class Trip {
     routes: Array<RoutesDto>;
-    waypoints: Array<Waypoint>;
+    waypoints: Array<Waypoints>;
 
-    constructor(routes: Array<RoutesDto>, waypoints: any){
+    constructor(routes: Array<RoutesDto>, waypoints: Array<Waypoints>){
         this.routes = routes;
-        this.waypoints = waypoints[0];
+        this.waypoints = waypoints;
     }
   }
