@@ -56,7 +56,15 @@ export class HomeComponent implements OnInit{
   }
 
   getIndividualWalk() {
-    this.router.navigate(['/map'], {state: { chosenPOIs: this.chosenPOIs}})
+    let mode: string = '';
+    if(this.mobilityOptionsForm.controls.foot_traffic.value === true){
+      mode = 'foot';
+    } else if (this.mobilityOptionsForm.controls.public_transport.value === true) {
+      mode = 'car';
+    } else if (this.mobilityOptionsForm.controls.publibike.value === true) {
+      mode = 'bike';
+    }
+    this.router.navigate(['/map'], {state: { chosenPOIs: this.chosenPOIs, mode: mode}})
   }
 
   private categorizeData(data: POI[], category: String): POI[] {
