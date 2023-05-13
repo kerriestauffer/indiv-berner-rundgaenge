@@ -5,11 +5,12 @@ import * as Joi from 'joi';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { RoutesModule } from './routes/routes.module';
+import {HttpModule} from '@nestjs/axios'
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SeedModule } from './seed/seed.module';
 import { MongoModule } from './mongo/mongo.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { PoiDataModule } from './poi-data/poi-data.module';
 
 @Module({
@@ -44,6 +45,8 @@ import { PoiDataModule } from './poi-data/poi-data.module';
       },
       inject: [ConfigService],
     }),
+    RoutesModule,
+    HttpModule,
     SeedModule,
     MongoModule,
     PoiDataModule,
