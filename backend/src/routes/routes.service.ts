@@ -13,7 +13,7 @@ export class RoutesService {
 
     constructor(private httpService: HttpService){}
 
-    async getRoute(coordinates: any, mode: any) {
+    async getTrip(coordinates: any, mode: any) {
         console.log('params: ' + coordinates + ' mode ' + mode)
         console.log(`${this.osrm_trip_url}/v1/${mode}/${coordinates}?geometries=geojson`)
         const routes$ = this.httpService.get(`${this.osrm_trip_url}/v1/${mode}/${coordinates}?geometries=geojson`);
