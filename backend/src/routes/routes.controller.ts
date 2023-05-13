@@ -7,7 +7,7 @@ export interface RouteQueryParams {
   mode: string
 }
 
-@Controller('routes')
+@Controller('trips')
 export class RoutesController {
 
   constructor(private readonly routesService: RoutesService) {}
@@ -22,10 +22,10 @@ export class RoutesController {
     name: 'routeQueryParams',
     description: 'coordinates, mode',
   })
-  findRoute(@Query() routeQueryParams: RouteQueryParams) {
+  findTrip(@Query() routeQueryParams: RouteQueryParams) {
     console.log(routeQueryParams)
     try {
-      return this.routesService.getRoute(routeQueryParams.coordinates, routeQueryParams.mode);
+      return this.routesService.getTrip(routeQueryParams.coordinates, routeQueryParams.mode);
     } catch(error){
       throw new Error(error);
     }
