@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataService, POI } from '../shared/data.service';
+import { MatFormFieldModule } from "@angular/material/form-field";
+
 
 export type CategorizedData = {
   name: string;
@@ -21,6 +23,7 @@ export class HomeComponent {
 
   public POIoptions: POI[] = []; // POI of interest we get from the backend
   chosenPOIs: POI[] = []; // array to store user chose POIs
+  search : String ="";
 
   public categoriesWithData: CategorizedData[] = [
     { name: 'Kunst im öffentlichen Raum', data: [] },
