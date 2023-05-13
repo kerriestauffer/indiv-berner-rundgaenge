@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 
 import * as L from 'leaflet';
+import { TripService } from '../shared/trips.service';
+import { POI } from '../shared/data.service';
+import { Navigation, Router } from '@angular/router';
+import { Trip } from '../shared/dto/trip.dto';
+import { Waypoint } from '../shared/dto/waypoint.dto';
 L.Icon.Default.imagePath = 'assets/images/';
 
 @Component({
@@ -9,6 +14,9 @@ L.Icon.Default.imagePath = 'assets/images/';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent {
+  chosenPOIs: POI[] = [];
+  trip: Trip | undefined;
+
   map: any;
   data: any = {
     type: 'FeatureCollection',
@@ -84,36 +92,41 @@ export class MapComponent {
       },
     ],
   };
-  waypoints = [
-    {
-      waypoint_index: 0,
-      trips_index: 0,
-      hint: 'ZrQCgEXEWYYwAAAAAAAAABMAAAAAAAAAnZKgQQAAAABHGgFBAAAAADAAAAAAAAAAEwAAAAAAAAA2-gAA17xxAIFczAL4u3EAMFzMAgEAjwq_P9b_',
-      distance: 19.22363768,
-      name: 'Bubenbergrain',
-      location: [7.453911, 46.947457],
-    },
-    {
-      waypoint_index: 1,
-      trips_index: 0,
-      hint: '1FCwgN5QsIAbAAAAFwAAACgBAAAPAQAAbzbDQEDCokD6poNCdupwQg0AAAAMAAAAlAAAAIgAAAA2-gAAETpxAP89zAJQOnEAZz7MAgEATxK_P9b_',
-      distance: 12.51774535,
-      name: 'Dietlerstrasse',
-      location: [7.420433, 46.939647],
-    },
-    {
-      waypoint_index: 2,
-      trips_index: 0,
-      hint: 'km4EgHRNWIY4AAAADQAAAM8AAAAVAAAArxsXQhHDCEGI3glDwLZiQTgAAAANAAAAzwAAABUAAAA2-gAAgcFxAHpZzAIjwnEA4ljMAg8AXwO_P9b_',
-      distance: 20.922894431,
-      name: 'Schifflaube',
-      location: [7.455105, 46.946682],
-    },
-  ];
-  public ngAfterViewInit(): void {
-    this.loadMap();
+  waypoints: Waypoint[] = [];
+
+  constructor(private tripService: TripService, private router: Router){
+    let nav: Navigation | null;
+    nav = this.router.getCurrentNavigation();
+
+    if (nav && nav.extras && nav.extras.state && nav.extras.state['chosenPOIs']) {
+      this.chosenPOIs = nav.extras.state['chosenPOIs'] as POI[];
+      console.log('in constructor chosen POIs ' + this.chosenPOIs)
+    }
   }
-  private loadMap(): void {
+
+  public ngAfterViewInit(): void {
+    this.getTrip();
+    //this.loadMap();
+  }
+
+  private getTrip(){
+    this.tripService.getTrip(this.chosenPOIs).subscribe((trip) => {
+      this.trip = trip;
+      trip.waypoints.forEach((waypoint) => {
+        console.log('location ' + waypoint.location)
+      })
+      let waypoints: Waypoint[] = [];
+      waypoints = trip.waypoints;
+      console.log(trip)
+      waypoints.forEach((waypoint) => {
+        console.log(waypoint.location[1])
+      })
+      console.log('waypoints ' + waypoints)
+      this.loadMap(waypoints);
+    })
+  }
+
+  private loadMap(waypoints: Waypoint[]): void {
     this.map = L.map('map').setView([46.9441763932318, 7.44932287319358], 18);
     L.tileLayer
       .wms('https://map.bern.ch/wms/OpenData/proxy.php?', {
@@ -121,9 +134,9 @@ export class MapComponent {
         attribution: '© 2018 Geoinformation Stadt Bern',
       })
       .addTo(this.map);
-    this.addRoute();
+    this.addRoute(waypoints);
   }
-  addRoute() {
+  addRoute(waypoints: Waypoint[]) {
     const geoJSON = L.geoJSON(this.data, {
       style: function (feature) {
         return { color: 'black' };
@@ -131,15 +144,15 @@ export class MapComponent {
     }).addTo(this.map);
     this.map.fitBounds(geoJSON.getBounds());
 
-    for (let i = 0; i < this.waypoints.length; i++) {
+    waypoints.forEach((waypoint) => {
       L.marker(
         new L.LatLng(
-          this.waypoints[i].location[1],
-          this.waypoints[i].location[0]
+          waypoint.location[1],
+          waypoint.location[0]
         )
       )
-        .bindPopup(this.waypoints[i].name)
+        .bindPopup(waypoint.name)
         .addTo(this.map);
-    }
+    })
   }
 }

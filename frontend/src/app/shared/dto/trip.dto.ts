@@ -1,5 +1,4 @@
-export class Waypoint {
-    //todo: unique id
+export class Waypoints {
     hint: string;
     distance: number;
     name: string;
@@ -42,12 +41,12 @@ export class Geometry {
   }
 
 
-export class Route {
+export class Trip {
     routes: Array<RoutesDto>;
-    waypoints: Array<Waypoint>;
+    waypoints: Array<Waypoints>;
 
-    constructor(routes: Array<RoutesDto>, waypoints: any){
+    constructor(routes: Array<RoutesDto>, waypoints: Array<Waypoints>){
         this.routes = routes;
-        this.waypoints = waypoints[0];
+        this.waypoints = waypoints;
     }
   }
