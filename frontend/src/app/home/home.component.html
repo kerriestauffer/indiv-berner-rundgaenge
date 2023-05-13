@@ -3,6 +3,26 @@
     - places form / checkboxes
 -->
 <body>
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Point of Interest</mat-label>
+    <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredPOIOptions | async" [value]="option" (click)="togglePOISelection(option)">
+        {{option.Punktname}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-icon
+    aria-hidden="false"
+    aria-label="directions_walk"
+    fontIcon="search"
+    matTooltip="Foot traffic"
+    matTooltipClass="example-tooltip-uppercase"
+    class="options"
+  >
+  </mat-icon>
+</form>
   <h2>Mobilität</h2>
   <form [formGroup]="mobilityOptionsForm">
     <div>

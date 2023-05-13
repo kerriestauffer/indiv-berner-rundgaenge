@@ -18,6 +18,7 @@ L.Icon.Default.imagePath = 'assets/images/';
 export class MapComponent {
   selectedPOIid: string = '';
   chosenPOIs: POI[] = [];
+  mode: string = '';
   trip: Trip | undefined;
 
   map: any;
@@ -43,6 +44,10 @@ export class MapComponent {
     ) {
       this.chosenPOIs = nav.extras.state['chosenPOIs'] as POI[];
     }
+
+    if (nav && nav.extras && nav.extras.state && nav.extras.state['mode']) {
+      this.mode = nav.extras.state['mode'] as string;
+    }
   }
 
   public ngAfterViewInit(): void {
@@ -51,7 +56,7 @@ export class MapComponent {
   }
 
   private getTrip() {
-    this.tripService.getTrip(this.chosenPOIs).subscribe((trip) => {
+    this.tripService.getTrip(this.chosenPOIs, this.mode).subscribe((trip) => {
       this.trip = trip;
       this.waypoints = trip.waypoints;
       let geometryDto: GeometryDto = new GeometryDto(
