@@ -7,7 +7,7 @@ import { DataService, POI } from '../shared/data.service';
   styleUrls: ['./poi-infobox.component.scss'],
 })
 export class PoiInfoboxComponent {
-  @Input() poiId = '';
+  @Input() poiId = '645f4a22bfc618b390e3305d';
   poi!: POI;
 
   constructor(private dataService: DataService) {
