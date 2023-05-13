@@ -31,4 +31,12 @@ export class DataService {
       console.log(res);
     });*/
   }
+
+  getPOIbyId(id: string): Observable<POI> {
+    const url = `${environment.api}/poi-data/${id}`;
+    // console.log(`GET request to ${url}`);
+    return this.http.get<POI>(url); /*.subscribe((res) => {
+      console.log(res);
+    });*/
+  }
 }
