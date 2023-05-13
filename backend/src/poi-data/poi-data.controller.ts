@@ -17,4 +17,9 @@ export class PoiDataController {
   findAll() {
     return this.poiDataService.findAll();
   }
+
+  @Get(':id')
+  findById(@Param('id') id: string) {
+    return this.poiDataService.findById(id);
+  }
 }
