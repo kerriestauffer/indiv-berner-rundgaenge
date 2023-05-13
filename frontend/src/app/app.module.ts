@@ -12,9 +12,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MapComponent } from './map/map.component';
+import { PoiInfoboxComponent } from './poi-infobox/poi-infobox.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, MapComponent],
+  declarations: [AppComponent, HomeComponent, MapComponent, PoiInfoboxComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
