@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit{
     foot_traffic: new FormControl(true),
     public_transport: new FormControl(false),
     publibike: new FormControl(false),
-    myControl: new FormControl<string | POI>('')
   });
   myControl = new FormControl<string | POI>('');
 
