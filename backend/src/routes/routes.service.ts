@@ -26,9 +26,6 @@ export class RoutesService {
             }
             idArray.push(pointComponents[2])
         })
-        console.log('params: ' + coordinates + ' mode ' + mode)
-        console.log(`${this.osrm_trip_url}/v1/${mode}/${coordinates}?geometries=geojson`)
-        const routes$ = this.httpService.get(`${this.osrm_trip_url}/v1/${mode}/${coordinates}?geometries=geojson`);
         
         return this.httpService.get(`${this.osrm_trip_url}/v1/${mode}/${coordinates}?geometries=geojson`).pipe(map((response)  => {
             let geometry: Geometry = new Geometry(response.data.trips[0].geometry.coordinates, response.data.trips[0].geometry.type);

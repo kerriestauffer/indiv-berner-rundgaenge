@@ -23,7 +23,6 @@ export class RoutesController {
     description: 'coordinates, mode',
   })
   findTrip(@Query() routeQueryParams: RouteQueryParams) {
-    console.log(routeQueryParams)
     try {
       return this.routesService.getTrip(routeQueryParams.coordinates, routeQueryParams.mode);
     } catch(error){
