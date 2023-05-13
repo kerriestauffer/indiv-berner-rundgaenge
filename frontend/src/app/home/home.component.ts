@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataService, POI } from '../shared/data.service';
+import { TripService } from '../shared/trips.service';
+import { Trip } from '../shared/dto/trip.dto';
+import { Router } from '@angular/router';
 
 export type CategorizedData = {
   name: string;
@@ -21,6 +24,7 @@ export class HomeComponent {
 
   public POIoptions: POI[] = []; // POI of interest we get from the backend
   chosenPOIs: POI[] = []; // array to store user chose POIs
+  search : String ="";
 
   public categoriesWithData: CategorizedData[] = [
     { name: 'Kunst im öffentlichen Raum', data: [] },
@@ -33,7 +37,9 @@ export class HomeComponent {
     { name: 'Kunst & Kultur', data: [] },
   ];
 
-  public constructor(private dataService: DataService) {
+  trip: Trip | undefined;
+
+  public constructor(private router: Router, private dataService: DataService, private tripService: TripService) {
     dataService.testRequest().subscribe((res) => {
       this.POIoptions = res;
       //console.log(res);
@@ -46,7 +52,7 @@ export class HomeComponent {
 
   getIndividualWalk() {
     console.log(this.chosenPOIs);
-    // send backend request
+    this.router.navigate(['/map'], {state: { chosenPOIs: this.chosenPOIs}})
   }
 
   private categorizeData(data: POI[], category: String): POI[] {
