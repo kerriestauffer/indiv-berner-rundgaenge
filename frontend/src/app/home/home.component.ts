@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DataService, POI } from '../shared/data.service';
 import { TripService } from '../shared/trips.service';
