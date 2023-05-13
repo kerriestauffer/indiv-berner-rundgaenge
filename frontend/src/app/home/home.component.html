@@ -2,34 +2,32 @@
     - mobility toggles
     - places form / checkboxes
 -->
+<body>
 <h2>Mobility Options</h2>
 <form [formGroup]="mobilityOptionsForm">
-  <div class="flex-col">
-    <mat-slide-toggle formControlName="foot_traffic" labelPosition="before"
-      >Foot traffic</mat-slide-toggle
-    >
-    <mat-slide-toggle formControlName="public_transport" labelPosition="before"
-      >Public transport</mat-slide-toggle
-    >
-    <mat-slide-toggle formControlName="publibike" labelPosition="before"
-      >PubliBike</mat-slide-toggle
-    >
+  <div>
+    <mat-slide-toggle formControlName="foot_traffic" labelPosition="before" class="options" color="primary">
+      <mat-icon aria-hidden="false" aria-label="directions_walk" fontIcon="directions_walk"
+        matTooltip="Foot traffic"
+        matTooltipClass="example-tooltip-uppercase"
+        class="options">
+      </mat-icon>
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="public_transport" labelPosition="before" class="options" color="primary">
+      <mat-icon aria-hidden="false" aria-label="directions_bus" fontIcon="directions_bus"
+        matTooltip="public transport"
+        matTooltipClass="example-tooltip-uppercase"class="options">
+      </mat-icon>
+    </mat-slide-toggle>
+    <mat-slide-toggle formControlName="publibike" labelPosition="before" class="options" color="primary">
+      <mat-icon aria-hidden="false" aria-label="directions_bike" fontIcon="directions_bike"
+        matTooltip="Publibike"
+        matTooltipClass="example-tooltip-uppercase"class="options"></mat-icon>
+    </mat-slide-toggle>
   </div>
 </form>
-<h2>Ausgewählte Points of Interests</h2>
-<ul *ngFor="let chosenPOI of chosenPOIs">
-  <li>{{ chosenPOI.Punktname }}</li>
-</ul>
-<button
-  *ngIf="isAtLeastTwoSelected()"
-  mat-raised-button
-  color="primary"
-  (click)="getIndividualWalk()"
->
-  Individuellen Spaziergang erhalten
-</button>
+<h2>Points of Interests</h2>
 
-<h2>Points of Interests auswählen</h2>
 <mat-accordion>
   <div class="categories" *ngFor="let category of categoriesWithData">
     <mat-expansion-panel hideToggle>
@@ -38,15 +36,10 @@
       </mat-expansion-panel-header>
       <div class="grid-container">
         <div class="card-container" *ngFor="let poi of category.data">
-          <mat-card class="example-card" (click)="togglePOISelection(poi)">
+          <mat-card class="example-card">
             <mat-card-header>
               <mat-card-title-group>
-                <mat-card-title
-                  >{{ poi.Punktname }}
-                  <span class="selected" *ngIf="isSelected(poi)"
-                    >AUSGEWÄHLT</span
-                  ></mat-card-title
-                >
+                <mat-card-title>{{ poi.Punktname }}</mat-card-title>
                 <mat-card-subtitle>{{ poi.Rubrik }}</mat-card-subtitle>
                 <img
                   *ngIf="poi.Pfad_Foto"
@@ -68,3 +61,4 @@
     </mat-expansion-panel>
   </div>
 </mat-accordion>
+</body>
