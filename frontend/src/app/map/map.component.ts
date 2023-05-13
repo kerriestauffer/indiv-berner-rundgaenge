@@ -9,6 +9,8 @@ L.Icon.Default.imagePath = 'assets/images/';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent {
+  selectedPOIid: string = '';
+
   map: any;
   data: any = {
     type: 'FeatureCollection',
@@ -141,5 +143,17 @@ export class MapComponent {
         .bindPopup(this.waypoints[i].name)
         .addTo(this.map);
     }
+  }
+
+  displayPOIinfo(waypoint: any) {
+    console.log(waypoint);
+    this.selectedPOIid = waypoint._id;
+  }
+
+  isPointSelected(): boolean {
+    if (this.selectedPOIid) {
+      return true;
+    }
+    return false;
   }
 }

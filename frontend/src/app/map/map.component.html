@@ -9,11 +9,16 @@
       <div id="route-info">
         <h3>Ausgewählte Sehenswürdigkeiten</h3>
         <ng-container *ngFor="let point of waypoints"
-          ><div>
-            <p>{{ point.name }}</p>
+          ><div (click)="displayPOIinfo(point)">
+            <p class="underline">
+              {{ point.name }}
+            </p>
           </div></ng-container
         >
       </div>
     </div>
+  </div>
+  <div *ngIf="isPointSelected()">
+    <app-poi-infobox [poiId]="selectedPOIid"></app-poi-infobox>
   </div>
 </div>
