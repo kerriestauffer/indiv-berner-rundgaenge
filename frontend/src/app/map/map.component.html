@@ -9,7 +9,7 @@
       <div id="route-info">
         <h3>Ausgewählte Sehenswürdigkeiten</h3>
         <ng-container *ngFor="let point of waypoints"
-          ><div (click)="displayPOIinfo(point)">
+          ><div (click)="displayPOIinfo(point._id)">
             <p class="underline">
               {{ point.name }}
             </p>
