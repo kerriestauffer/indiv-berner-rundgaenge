@@ -1,8 +1,8 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { firstValueFrom, map } from 'rxjs';
+import { map } from 'rxjs';
 import { environment } from 'src/environment';
-import { RouteDto } from './dto/route.dto';
+import { Geometry, Route, RoutesDto, Waypoints } from './dto/route.dto';
 
 @Injectable()
 export class RoutesService {
@@ -19,9 +19,10 @@ export class RoutesService {
         const routes$ = this.httpService.get(`${this.osrm_trip_url}/v1/${mode}/${coordinates}?geometries=geojson`);
         
         return this.httpService.get(`${this.osrm_trip_url}/v1/${mode}/${coordinates}?geometries=geojson`).pipe(map((response)  => {
-            let routeDto: RouteDto;
-            routeDto = JSON.parse(response.data);
-            console.log('routeDto ' + routeDto)
+            let geometry: Geometry = new Geometry(response.data.trips[0].geometry.coordinates, response.data.trips[0].geometry.type);
+            let routes: RoutesDto = new RoutesDto(geometry, response.data.trips[0].weight_name, response.data.trips[0].weight, response.data.trips[0].duration, response.data.trips[0].distance)
+            let waypoints: Waypoints = response.data.waypoints;
+            let routeDto: Route = new Route([routes], [waypoints]);
             return routeDto;
         }))
     }
