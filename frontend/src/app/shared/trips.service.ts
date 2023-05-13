@@ -28,7 +28,6 @@ export class TripService {
         coordinatesString = `${coordinatesString};${poi.lon},${poi.lat},${poi._id}`
       }
     })
-    console.log(coordinatesString)
     return coordinatesString;
   }
 }

@@ -51,7 +51,6 @@ export class HomeComponent {
   }
 
   getIndividualWalk() {
-    console.log(this.chosenPOIs);
     this.router.navigate(['/map'], {state: { chosenPOIs: this.chosenPOIs}})
   }
 
