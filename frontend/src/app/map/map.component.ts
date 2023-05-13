@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import * as L from 'leaflet';
 import { TripService } from '../shared/trips.service';
-import { POI } from '../shared/data.service';
+import { DataService, POI } from '../shared/data.service';
 import { Navigation, Router } from '@angular/router';
 import { Trip } from '../shared/dto/trip.dto';
 import { Waypoint } from '../shared/dto/waypoint.dto';
@@ -25,7 +25,13 @@ export class MapComponent {
 
   waypoints: Waypoint[] = [];
 
-  constructor(private tripService: TripService, private router: Router) {
+  pointSelected = false;
+
+  constructor(
+    private tripService: TripService,
+    private dataService: DataService,
+    private router: Router
+  ) {
     let nav: Navigation | null;
     nav = this.router.getCurrentNavigation();
 
@@ -47,8 +53,7 @@ export class MapComponent {
   private getTrip() {
     this.tripService.getTrip(this.chosenPOIs).subscribe((trip) => {
       this.trip = trip;
-      let waypoints: Waypoint[] = [];
-      waypoints = trip.waypoints;
+      this.waypoints = trip.waypoints;
       let geometryDto: GeometryDto = new GeometryDto(
         trip.routes[0].geometry.coordinates,
         'LineString'
@@ -61,7 +66,7 @@ export class MapComponent {
         trip.routes[0].distance
       );
       let dataDto: DataDto = new DataDto([featureDto]);
-      this.loadMap(waypoints, dataDto);
+      this.loadMap(this.waypoints, dataDto);
     });
   }
 
@@ -90,15 +95,13 @@ export class MapComponent {
     });
   }
 
-  displayPOIinfo(waypoint: any) {
-    console.log(waypoint);
-    this.selectedPOIid = waypoint._id;
+  getPOInameById(id: string): string {
+    const poi = this.chosenPOIs.find((item) => item._id === id);
+    return poi?.Punktname || 'name';
   }
 
-  isPointSelected(): boolean {
-    if (this.selectedPOIid) {
-      return true;
-    }
-    return false;
+  displayPOIinfo(id: any) {
+    this.selectedPOIid = id;
+    this.pointSelected = true;
   }
 }

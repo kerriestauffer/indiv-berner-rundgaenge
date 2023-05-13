@@ -11,14 +11,14 @@
         <ng-container *ngFor="let point of waypoints"
           ><div (click)="displayPOIinfo(point._id)">
             <p class="underline">
-              {{ point.name }}
+              {{ getPOInameById(point._id) }}
             </p>
           </div></ng-container
         >
       </div>
     </div>
   </div>
-  <div *ngIf="isPointSelected()">
+  <div class="infobox" *ngIf="pointSelected">
     <app-poi-infobox [poiId]="selectedPOIid"></app-poi-infobox>
   </div>
 </div>

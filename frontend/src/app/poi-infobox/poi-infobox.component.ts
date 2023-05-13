@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { DataService, POI } from '../shared/data.service';
 
 @Component({
@@ -12,7 +12,12 @@ export class PoiInfoboxComponent {
 
   constructor(private dataService: DataService) {
     dataService.getPOIbyId(this.poiId).subscribe((res) => {
-      console.log(res);
+      this.poi = res;
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.dataService.getPOIbyId(this.poiId).subscribe((res) => {
       this.poi = res;
     });
   }
