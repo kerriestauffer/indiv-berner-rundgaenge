@@ -13,9 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MapComponent } from './map/map.component';
+import { PoiInfoboxComponent } from './poi-infobox/poi-infobox.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, MapComponent],
+  declarations: [AppComponent, HomeComponent, MapComponent, PoiInfoboxComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
