@@ -5,10 +5,10 @@
 <body>
 <form class="example-form">
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Point of Interest    </mat-label>
+    <mat-label>Point of Interest</mat-label>
     <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredPOIOptions | async" [value]="option">
+      <mat-option *ngFor="let option of filteredPOIOptions | async" [value]="option" (click)="togglePOISelection(option)">
         {{option.Punktname}}
       </mat-option>
     </mat-autocomplete>
