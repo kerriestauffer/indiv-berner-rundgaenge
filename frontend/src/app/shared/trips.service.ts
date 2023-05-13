@@ -15,7 +15,7 @@ export class TripService {
   constructor(private http: HttpClient) { }
 
   getTrip(pois: POI[]): Observable<Trip>{
-    let tripparamsDto = new TripParamsDto(this.getTripCoordinates(pois), 'foot');
+    let tripparamsDto = new TripParamsDto(this.getTripCoordinates(pois), 'foot', );
     return this.http.get<Trip>(`${this.apiUrl}/trips?coordinates=${tripparamsDto.coordinates}&mode=${tripparamsDto.mode}`);
   }
 
@@ -23,9 +23,9 @@ export class TripService {
     let coordinatesString = '';
     pois.forEach((poi) => {
       if(coordinatesString === ''){
-        coordinatesString = `${poi.lon},${poi.lat}`
+        coordinatesString = `${poi.lon},${poi.lat},${poi._id}`
       } else {
-        coordinatesString = `${coordinatesString};${poi.lon},${poi.lat}`
+        coordinatesString = `${coordinatesString};${poi.lon},${poi.lat},${poi._id}`
       }
     })
     console.log(coordinatesString)
