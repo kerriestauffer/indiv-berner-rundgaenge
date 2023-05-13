@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { DataService, POI } from '../shared/data.service';
 import { TripService } from '../shared/trips.service';
 import { Trip } from '../shared/dto/trip.dto';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 export type CategorizedData = {
   name: string;
@@ -24,6 +24,7 @@ export class HomeComponent {
 
   public POIoptions: POI[] = []; // POI of interest we get from the backend
   chosenPOIs: POI[] = []; // array to store user chose POIs
+  search : String ="";
 
   public categoriesWithData: CategorizedData[] = [
     { name: 'Kunst im öffentlichen Raum', data: [] },
