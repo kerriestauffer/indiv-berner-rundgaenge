@@ -17,14 +17,12 @@ export class PoiDataService {
   async findById(id: string) {
     const poiCollection = this.mongo.getCollection(this.poiCollectionName);
     const poiData = await poiCollection.find().toArray();
-    const objId = new ObjectId(id); /*
+    /* used this code to retrieve valid id
     poiData.forEach((item) => {
       console.log(item._id.toString());
-      if (item._id.toString() === id) {
-        console.log('its a match');
-      }
-    });*/
-    const poi = poiCollection.find({ _id: objId });
+    });
+    */
+    const poi = poiData.find((item) => item._id.toString() === id);
     return poi;
   }
 }
